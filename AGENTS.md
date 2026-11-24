@@ -12,7 +12,8 @@ Preservar e evoluir um jogo físico de cartas competitivo e educativo que ensina
 2. `Chart_Battle_102_cartas_A4.html`: **implementação atual** das cartas e do layout imprimível; referência para texto, IDs e duplicação física.
 3. `gabarito.md`: gabarito estrito dos 18 desafios (duplas aceitas, dupla preferida, armadilha e justificativas).
 4. `Chart_Battle_gabarito_A4.html`: folha imprimível do gabarito, com exatamente os mesmos números e justificativas de `gabarito.md`.
-5. `AGENTS.md`: restrições e checklist para trabalho de agentes, não substitui o catálogo.
+5. `colinha.md` e `Chart_Battle_colinha_A4.html`: regras resumidas para a mesa, em 1 folha; repetem as regras do README com o mesmo texto nos dois arquivos.
+6. `AGENTS.md`: restrições e checklist para trabalho de agentes, não substitui o catálogo.
 
 Se houver divergência entre documentação e HTML, **informe a divergência** e proponha a reconciliação; não mude silenciosamente conteúdo, cores ou contagem. Registre ajustes importantes em ambos os documentos quando aplicável.
 
@@ -36,12 +37,13 @@ Se houver divergência entre documentação e HTML, **informe a divergência** e
 
 ## HTML e restrições de impressão
 
-- Artefatos: dois **HTML/CSS autocontidos**, `Chart_Battle_102_cartas_A4.html` (cartas) e `Chart_Battle_gabarito_A4.html` (gabarito), com SVGs inline e sem dependências remotas; devem funcionar offline.
+- Artefatos: três **HTML/CSS autocontidos**, `Chart_Battle_102_cartas_A4.html` (cartas), `Chart_Battle_gabarito_A4.html` (gabarito) e `Chart_Battle_colinha_A4.html` (colinha), com SVGs inline e sem dependências remotas; devem funcionar offline.
 - **A4 retrato: 210 × 297 mm**, margem **interna** de **10 mm** em todos os lados.
 - Páginas `.sheet` de 210 × 297 mm e grade `.card-grid` de 190 × 277 mm, com **3 colunas × 3 linhas**.
 - Cartões `.card` com **61 × 88 mm** e espaçamento **3 mm**. Máximo 9 por folha, **12 folhas** para 102 cartas.
 - A grade `.card-grid` é centralizada na folha (`justify-content` e `align-content: center`): margens efetivas de **10,5 mm** nas laterais e **13,5 mm** em cima e embaixo.
 - A folha do gabarito é **uma única página A4**, com a dobra em **105 mm**: à esquerda só números, à direita as justificativas. Não deixe a tabela passar de uma página.
+- A colinha também é **uma única página A4**, só frente, sem explicação das Ações (cada carta explica o próprio efeito).
 - `@media print` deve ocultar elementos de interface (`.toolbar`, `.notes`) e evitar margens extras e escalas automáticas.
 - A regra `@page { size: A4 portrait; margin: 0; }` é intencional: a margem de 1 cm está **dentro da folha**; margens adicionais do navegador prejudicam dimensões.
 - Preserve quebras de página, não deixe cartas partidas ou conteúdo cortado. Verifique a última página (3 cartas).
@@ -66,6 +68,7 @@ As regras estão nas seções 3, 4 e 6 do README e foram decididas pelo grupo em
 **Nunca invente ou cristalize como definitivo**:
 
 - Mudanças no gabarito sem decisão explícita do grupo. `gabarito.md` e `Chart_Battle_gabarito_A4.html` mudam sempre juntos.
+- Mudança de regra sem revisar a colinha. `colinha.md` e `Chart_Battle_colinha_A4.html` mudam sempre juntos.
 - Mudanças nas regras ou nos textos das Ações sem decisão explícita do grupo. Ao mudar o texto de uma Ação, atualize juntos o HTML e a seção 6 do README.
 - Alegações de que a duração e o balanceamento foram comprovados por playtests: os números do README vêm de simulação.
 
@@ -104,6 +107,7 @@ Ao propor novas regras, indique **“proposta”** e atualize documentação ape
 - [ ] Textos das Ações iguais no HTML e na seção 6 do README.
 - [ ] `gabarito.md` só usa números e nomes de cartas que existem no HTML.
 - [ ] `gabarito.md` e `Chart_Battle_gabarito_A4.html` têm os mesmos números (verificação abaixo), e a folha cabe em 1 página A4.
+- [ ] A colinha segue as regras do README, tem o mesmo texto em `colinha.md` e no HTML, e cabe em 1 página A4.
 
 ### Exemplo de verificação rápida (Python + BeautifulSoup, se disponível)
 

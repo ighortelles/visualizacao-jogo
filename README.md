@@ -31,8 +31,9 @@ O objetivo educativo não é decorar um único gráfico correto, mas justificar 
 Além das cartas, a partida usa:
 
 - **1 folha de gabarito**, impressa de [`Chart_Battle_gabarito_A4.html`](./Chart_Battle_gabarito_A4.html) e dobrada ao meio (o mesmo conteúdo está em [`gabarito.md`](./gabarito.md));
+- **1 colinha** com as regras resumidas, impressa de [`Chart_Battle_colinha_A4.html`](./Chart_Battle_colinha_A4.html) (o texto está em [`colinha.md`](./colinha.md));
 - **1 dado de 6 lados**, usado por cinco cartas de Ação;
-- **papel e caneta** para o placar.
+- **papel e caneta** para o placar (a colinha traz um exemplo de como anotar).
 
 A faixa sugerida é de **2 a 6 jogadores**. Pela simulação (seção 12), uma partida até 15 pontos dura de 8 a 10 rodadas, cerca de 20 a 30 minutos se cada rodada levar de 2 a 3,5 minutos. Esse tempo ainda não foi medido em partidas reais.
 
@@ -209,12 +210,13 @@ Seis desafios tratam de codificação/percepção visual (01–06), seis de geoe
 
 ## 8. Arquivos HTML e impressão
 
-Há dois arquivos para imprimir, ambos **HTML estáticos e autocontidos**, com CSS e ilustrações vetoriais inline, que funcionam sem internet:
+Há três arquivos para imprimir, todos **HTML estáticos e autocontidos**, com CSS e ilustrações vetoriais inline, que funcionam sem internet:
 
 - [`Chart_Battle_102_cartas_A4.html`](./Chart_Battle_102_cartas_A4.html): as 102 cartas, em 12 folhas;
-- [`Chart_Battle_gabarito_A4.html`](./Chart_Battle_gabarito_A4.html): o gabarito, em 1 folha.
+- [`Chart_Battle_gabarito_A4.html`](./Chart_Battle_gabarito_A4.html): o gabarito, em 1 folha;
+- [`Chart_Battle_colinha_A4.html`](./Chart_Battle_colinha_A4.html): a colinha com as regras resumidas, em 1 folha, só frente.
 
-Nenhum dos dois **é um jogo digital interativo** nem implementa regras, pontuação ou validação.
+Nenhum deles **é um jogo digital interativo** nem implementa regras, pontuação ou validação.
 
 ### Características técnicas já presentes
 
@@ -239,7 +241,7 @@ Uma folha A4 com uma linha tracejada no meio. À esquerda ficam só números: o 
 5. Desative cabeçalhos e rodapés gerados pelo navegador; confira a pré-visualização antes de cortar.
 6. Recorte as cartas pelas bordas. Para cartas opacas e duráveis, use papel mais firme, plástico protetor ou sleeves. A folha do gabarito não é recortada, só dobrada.
 
-**Nota:** o CSS usa `@page { size: A4 portrait; margin: 0 }` para que a folha incorpore a própria margem de 10 mm. A margem física e a escala devem ser verificadas em impressão-teste. Não imprimir com “ajustar à página” se isso redimensionar as cartas. No PDF gerado pelo Firefox em 24/11/2026, as medidas conferem: 12 páginas de cartas com as margens acima e o gabarito em 1 página.
+**Nota:** o CSS usa `@page { size: A4 portrait; margin: 0 }` para que a folha incorpore a própria margem de 10 mm. A margem física e a escala devem ser verificadas em impressão-teste. Não imprimir com “ajustar à página” se isso redimensionar as cartas. No PDF gerado pelo Firefox em 24/11/2026, as medidas conferem: 12 páginas de cartas com as margens acima, e o gabarito e a colinha em 1 página cada.
 
 ## 9. Estrutura mínima sugerida do repositório
 
@@ -248,8 +250,10 @@ chart-battle/
 ├── README.md
 ├── AGENTS.md
 ├── gabarito.md
+├── colinha.md
 ├── Chart_Battle_102_cartas_A4.html
 ├── Chart_Battle_gabarito_A4.html
+├── Chart_Battle_colinha_A4.html
 └── 2026_2_Jogos_enunciado.pdf
 ```
 
@@ -263,7 +267,8 @@ Ainda não há sistema de build, framework JavaScript, testes automatizados, arq
 - [x] Ajustar o balanceamento dos montes e a meta de 15 pontos, por simulação (seção 12).
 - [x] Revisar a precisão conceitual dos exemplos de visualização e suas legendas: histograma, boxplot, mapa de calor, saturação, direção do movimento, cor única nos canais visuais e legendas 38, 39 e 46.
 - [ ] Testar impressão real em A4, conferindo margem, corte e legibilidade. O PDF pelo Firefox foi conferido em 24/11/2026; falta imprimir em papel.
-- [ ] Opcional: criar o **verso das cartas**, manual de regras diagramado e fichas de pontuação.
+- [x] Colinha de regras em 1 folha, com exemplo de placar ([`colinha.md`](./colinha.md), [`Chart_Battle_colinha_A4.html`](./Chart_Battle_colinha_A4.html)).
+- [ ] Opcional: criar o **verso das cartas**.
 - [ ] Opcional: automatizar a geração do baralho, o gabarito e os testes estruturais.
 
 ## 11. Convenções do projeto
