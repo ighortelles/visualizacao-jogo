@@ -1,0 +1,137 @@
+# AGENTS.md — Instruções para agentes de IA
+
+Este arquivo orienta agentes que leem, editam, revisam ou geram arquivos no repositório **Chart Battle**. **Leia também o `README.md` antes de alterar qualquer coisa.** O projeto está em prototipação acadêmica para Visualização de Dados.
+
+## Missão
+
+Preservar e evoluir um jogo físico de cartas competitivo e educativo que ensina escolhas de representação visual para **variáveis visuais**, **dados geoespaciais** e **séries temporais**. Há um HTML estático imprimível e uma proposta de regras. **Não apresente o protótipo como jogo digital funcional.**
+
+## Fonte de verdade e estado atual
+
+1. `README.md`: descrição, regras **propostas**, categorias, catálogo e pontos ainda abertos.
+2. `Chart_Battle_102_cartas_A4.html`: **implementação atual** das cartas e do layout imprimível; referência para texto, IDs e duplicação física.
+3. `AGENTS.md`: restrições e checklist para trabalho de agentes, não substitui o catálogo.
+
+Se houver divergência entre documentação e HTML, **informe a divergência** e proponha a reconciliação; não mude silenciosamente conteúdo, cores ou contagem. Registre ajustes importantes em ambos os documentos quando aplicável.
+
+## Invariantes obrigatórias
+
+| Grupo | IDs estáveis | Modelos | Multiplicador | Total |
+|---|---|---:|---:|---:|
+| Dados | 01–18 | 18 | ×1 | 18 |
+| Visualização | 19–34 | 16 | ×2 | 32 |
+| Variáveis Visuais | 35–50 | 16 | ×2 | 32 |
+| Ação | 51–60 | 10 | ×2 | 20 |
+| **Total** | **01–60** | **60** | — | **102** |
+
+- IDs de 01 a 60 identificam **tipos**, não 102 instâncias numeradas separadamente.
+- **Não incluir figuras, gráficos, mapas, ícones ilustrativos ou SVG no corpo das cartas de Dados**; enunciados e títulos apenas. O pequeno símbolo do cabeçalho que identifica a categoria faz parte da identidade visual, não de um exemplo de dados.
+- Manter a **cor do cabeçalho e do fundo por categoria**; cores de **gráficos/ilustrações internos são independentes**, sem obrigação de monocromia.
+- Paleta **atual do HTML**: Dados azul; Visualização violeta; Variáveis Visuais verde; Ação rosa/magenta. Não misturar identidades entre categorias, nem assumir que toda ilustração deve ter a cor da categoria.
+- Manter o idioma `pt-BR`, acentuação, títulos legíveis e sem cortes.
+- Preservar a separação entre **18 cartas de desafio** e **84 cartas de jogador** na documentação de regras.
+- Não declarar como implementado nenhum gabarito, bot, sistema de jogo, pontuação automática ou testes que não existam no repositório.
+
+## HTML e restrições de impressão
+
+- Artefato atual: **HTML/CSS autocontido**, com SVGs inline e sem dependências remotas; deve funcionar offline.
+- **A4 retrato: 210 × 297 mm**, margem **interna** de **10 mm** em todos os lados.
+- Páginas `.sheet` de 210 × 297 mm e grade `.card-grid` de 190 × 277 mm, com **3 colunas × 3 linhas**.
+- Cartões `.card` com **61 × 88 mm** e espaçamento **3 mm**. Máximo 9 por folha, **12 folhas** para 102 cartas.
+- `@media print` deve ocultar elementos de interface (`.toolbar`, `.notes`) e evitar margens extras e escalas automáticas.
+- A regra `@page { size: A4 portrait; margin: 0; }` é intencional: a margem de 1 cm está **dentro da folha**; margens adicionais do navegador prejudicam dimensões.
+- Preserve quebras de página, não deixe cartas partidas ou conteúdo cortado. Verifique a última página (3 cartas).
+- Nunca rasterizar ilustrações SVG sem necessidade; prefira preservar vetores e texto selecionável.
+
+## Estrutura atual do HTML
+
+- Cada página é `section.sheet` com `div.card-grid`.
+- Cada carta é `article.card` com classe de categoria `dados`, `visualizacao`, `variavel` ou `acao`.
+- O cabeçalho contém `.cat` e `.num`.
+- As cartas de Dados usam `.body.data-only`, `.data-tag`, `h2` e `p` — **sem `.illustration`**.
+- As outras usam `h2`, `.illustration` contendo um SVG e `.caption`.
+- Não há JavaScript de aplicação; há apenas o botão HTML de impressão (`window.print()`).
+
+Se quiser refatorar para geração baseada em dados, preserve a saída HTML estática, as classes de categoria ou um contrato equivalente, e a correspondência 1:1 com os IDs e textos aprovados. Evite introduzir dependências externas desnecessárias.
+
+## Regras e limites de implementação
+
+A mecânica **proposta**, não validada, é: dar 5 cartas por participante do monte de 84; revelar 1 carta de Dados; em ordem, cada jogador apresenta 1 Visualização + 1 Variável Visual (ou passa), justifica a escolha e pontua; repõe a mão até 5 quando possível; segue-se para o próximo desafio. Pontos: **+2** representação adequada, **+1** variável adequada, **+1** bônus por combinação preferencial, **0** para combinação inteiramente inadequada; objetivo provisório **15 pontos**. As ações têm efeitos descritos nas cartas e timing ainda em aberto.
+
+**Nunca invente ou cristalize como definitivo**:
+
+- Gabarito completo, combinatória de respostas preferenciais ou penalidades.
+- Regras de timing/limite das Ações, além da proposta explicitada no README.
+- Comportamento em falta de cartas, bloqueio em partidas de 2 jogadores e desafios substituídos.
+- Alegações de que a duração e o balanceamento foram comprovados por playtests.
+
+Ao propor novas regras, indique **“proposta”** e atualize documentação apenas depois de uma decisão explícita ou de um teste registrado. **Aceite múltiplas codificações válidas quando a justificativa e a pergunta de análise permitirem.**
+
+## Critérios científicos/didáticos
+
+- Diferenciar **tipo de gráfico/mapa** de **variável visual** (canal de codificação).
+- Associar escolha de visualização ao **objetivo da pergunta**, não somente ao tipo de arquivo/conjunto de dados.
+- Mapas coropléticos: cuidado com totais brutos e normalização (taxas, densidades) quando relevante.
+- Cor categórica para classes e sequencial/divergente para quantidades ordenadas ou variação em torno de referência, conforme o problema.
+- Séries temporais: respeitar ordenação, granularidade e continuidade; não impor linhas para dados que não suportam interpretação contínua.
+- Considerar acessibilidade, contraste, leitura em impressão e evitar escalas enganosas.
+- Não chamar todo uso de cor de “cor sequencial”; não tratar tamanho de símbolo e área como equivalentes em qualquer situação.
+
+## Fluxo de trabalho recomendado
+
+1. **Inspecione** `README.md` e o HTML, identifique impacto em regras, catálogo, impressão e estilo.
+2. **Defina o escopo:** alterações de texto, layout, regras, balanceamento, dados ou geração de novas cartas. Evite mudanças fora do pedido.
+3. **Implemente** respeitando os invariantes de contagem, códigos, idioma, margem e paleta.
+4. **Valide** a estrutura; se alterar layout, confira visualmente PDF ou pré-visualização de impressão em A4.
+5. **Documente** decisões e limitações. Explique resultados com clareza e não alegue ter testado o que não testou.
+
+## Checklist mínimo de validação
+
+- [ ] Exatamente **102** ocorrências de `article.card` e **12** `section.sheet`.
+- [ ] Classes de categoria: `dados=18`, `visualizacao=32`, `variavel=32`, `acao=20`.
+- [ ] Exatamente **60 IDs distintos**: 01–18 uma vez e 19–60 duas vezes.
+- [ ] Todas as cartas têm cabeçalho com categoria, número, título e texto adequado.
+- [ ] **Nenhuma carta de Dados contém `.illustration` ou SVG de figura**.
+- [ ] As ilustrações internas podem ter diferentes cores; layout por categoria permanece consistente.
+- [ ] Cada folha mantém A4 e a margem interna de **10 mm**.
+- [ ] Nenhum texto aparece fora da borda ou cortado na impressão.
+- [ ] HTML abre offline sem imagens ou bibliotecas externas.
+- [ ] README e AGENTS refletem alterações relevantes de contrato/escopo.
+
+### Exemplo de verificação rápida (Python + BeautifulSoup, se disponível)
+
+```python
+from collections import Counter
+from bs4 import BeautifulSoup
+
+html = open("Chart_Battle_102_cartas_A4.html", encoding="utf-8").read()
+soup = BeautifulSoup(html, "html.parser")
+cards = soup.select("article.card")
+assert len(cards) == 102
+assert len(soup.select("section.sheet")) == 12
+
+counts = Counter(
+    next(c for c in ("dados", "visualizacao", "variavel", "acao") if c in card["class"])
+    for card in cards
+)
+assert counts == {"dados": 18, "visualizacao": 32, "variavel": 32, "acao": 20}
+
+ids = Counter(int(card.select_one(".num").get_text(strip=True)) for card in cards)
+assert set(ids) == set(range(1, 61))
+assert all(ids[i] == (1 if i <= 18 else 2) for i in range(1, 61))
+assert all(card.select_one(".illustration") is None for card in soup.select(".card.dados"))
+```
+
+**Observação:** o exemplo depende de `beautifulsoup4` apenas para verificação local; **não** é dependência do HTML em produção e não implica que um sistema de testes esteja implementado no repositório.
+
+## Prioridades para contribuições futuras
+
+1. **Gabarito e matriz de compatibilidade** (justificativas, múltiplas respostas válidas, melhores respostas).
+2. **Regras completas das Ações** e solução de condições de borda.
+3. **Playtesting e balanceamento** do baralho misto e da pontuação.
+4. **Automação da geração** das cartas a partir de fonte estruturada, se útil.
+5. Verso das cartas, identidade visual de corte, testes automatizados e acessibilidade.
+
+## Comunicação de mudanças
+
+Ao concluir uma tarefa, informe: **o que mudou**, **quais arquivos foram afetados**, **como foi verificado** e **o que continua pendente**. Se uma sugestão contradiz requisitos do usuário ou dados existentes, sinalize e solicite decisão em vez de substituir silenciosamente a especificação.
