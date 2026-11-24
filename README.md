@@ -2,13 +2,13 @@
 
 Jogo educativo e competitivo de cartas para a disciplina de **Visualização de Dados**, com foco em **variáveis visuais**, **visualização de dados geoespaciais** e **visualização de séries temporais**.
 
-> **Status do projeto:** protótipo físico em desenvolvimento. O baralho de 102 cartas já está representado em um HTML estático para impressão; as regras e a pontuação abaixo são a proposta atual, ainda sujeita a testes. **Não há gabarito completo nem mecanismo de validação automática implementado.**
+> **Status do projeto:** protótipo físico em desenvolvimento. O baralho de 102 cartas já está representado em um HTML estático para impressão; as regras abaixo foram decididas pelo grupo e testadas por simulação (seção 12), mas ainda não em partidas reais. O gabarito dos 18 desafios está em [`gabarito.md`](./gabarito.md); **não há mecanismo de validação automática implementado.**
 
 ## 1. Conceito e objetivo
 
 Em cada rodada, uma carta de **Dados** apresenta uma situação de análise (por exemplo, comparar a densidade populacional dos bairros ou identificar uma tendência temporal). Os participantes disputam pontos formando combinações de **Visualização** + **Variável Visual** que façam sentido para o problema, enquanto cartas de **Ação** alteram o andamento da partida.
 
-O objetivo educativo não é decorar um único gráfico correto, mas justificar escolhas de representação, reconhecer alternativas aceitáveis e discutir seus limites. O objetivo competitivo proposto é **ser o primeiro a alcançar 15 pontos**, respeitando as regras de encerramento e desempate descritas abaixo.
+O objetivo educativo não é decorar um único gráfico correto, mas justificar escolhas de representação, reconhecer alternativas aceitáveis e discutir seus limites. O objetivo competitivo é **chegar a 15 pontos**: a partida termina no fim da rodada em que alguém alcança a meta, e vence quem tiver mais pontos (seção 4).
 
 ### Conteúdos da disciplina
 
@@ -28,53 +28,77 @@ O objetivo educativo não é decorar um único gráfico correto, mas justificar 
 
 **Importante:** os IDs representam **modelos de carta**, não instâncias únicas. Por exemplo, existem duas cartas físicas de ID 19 (Gráfico de barras), mas apenas uma de ID 01 (Distribuição de categorias).
 
-A sugestão de faixa para o protótipo é **2–6 jogadores**, com duração estimada de **15–25 minutos** (ainda não aferida em partidas reais).
+Além das cartas, a partida usa:
 
-## 3. Preparação da partida (proposta)
+- **1 folha de gabarito**, impressa de [`Chart_Battle_gabarito_A4.html`](./Chart_Battle_gabarito_A4.html) e dobrada ao meio (o mesmo conteúdo está em [`gabarito.md`](./gabarito.md));
+- **1 colinha** com as regras resumidas, impressa de [`Chart_Battle_colinha_A4.html`](./Chart_Battle_colinha_A4.html) (o texto está em [`colinha.md`](./colinha.md));
+- **1 dado de 6 lados**, usado por cinco cartas de Ação;
+- **papel e caneta** para o placar (a colinha traz um exemplo de como anotar).
 
-1. Separe as **18 cartas de Dados** em um monte exclusivo, embaralhado e virado para baixo.
-2. Embaralhe as **84 cartas dos jogadores** (32 de Visualização, 32 de Variáveis Visuais e 20 de Ação) em outro monte.
-3. Distribua **5 cartas do monte dos jogadores para cada participante**.
-4. Deixe um espaço central para o desafio revelado e outro para o descarte das cartas dos jogadores.
-5. Escolha o jogador inicial e revele a primeira carta de Dados.
+A faixa sugerida é de **2 a 6 jogadores**. Pela simulação (seção 12), uma partida até 15 pontos dura de 8 a 10 rodadas, cerca de 20 a 30 minutos se cada rodada levar de 2 a 3,5 minutos. Esse tempo ainda não foi medido em partidas reais.
 
-**Atenção ao balanceamento:** o monte misto pode distribuir mãos com poucas cartas combináveis, já que inclui Ações. Esse aspecto precisa ser testado; futuras versões podem separar ou controlar o número inicial de cada tipo de carta.
+## 3. Preparação da partida
 
-## 4. Como jogar (regras propostas)
+1. Separe as cartas em **quatro montes**, cada um embaralhado e virado para baixo: **Dados** (18), **Visualização** (32), **Variável Visual** (32) e **Ação** (20).
+2. Cada jogador recebe **4 Visualizações, 3 Variáveis Visuais e 1 Ação**.
+3. Deixe a folha do gabarito dobrada, com as justificativas para trás, junto com o dado e uma folha para o placar.
+4. Todos rolam o dado, e quem tirar o maior número começa. Se houver empate, os empatados rolam de novo.
+
+## 4. Como jogar
+
+Todos respondem ao mesmo desafio ao mesmo tempo. Quem começa a rodada revela o desafio e confere as respostas; essa vez passa para a esquerda a cada rodada.
 
 ### Uma rodada
 
-1. **Revelar o desafio:** apresente uma carta de Dados e leia o problema em voz alta.
-2. **Propor uma representação:** seguindo a ordem de turnos, cada participante pode baixar **1 carta de Visualização + 1 carta de Variável Visual** que, juntas, respondam ao desafio, ou passar.
-3. **Justificar:** o jogador explica brevemente por que a escolha atende à pergunta e que propriedade dos dados será codificada pela variável visual.
-4. **Avaliar:** compare a proposta com o gabarito do desafio (ainda a produzir); diferentes combinações podem ser aceitas, desde que justificadas.
-5. **Aplicar a pontuação:** registre a pontuação obtida conforme a tabela abaixo.
-6. **Repor a mão:** após resolver as jogadas, cada jogador que utilizou cartas compra do monte dos jogadores até retornar a **5 cartas**, caso haja cartas disponíveis.
-7. **Encerrar a rodada:** descarte o desafio utilizado e revele outro para a próxima rodada.
+1. **Aposta (opcional):** antes de revelar o desafio, quem quiser usar **Pontos Dobrados** coloca a carta na mesa.
+2. **Revelar o desafio:** quem começa vira a carta do topo do monte de Dados e lê o problema em voz alta.
+3. **Ações:** a partir de quem começa e seguindo para a esquerda, cada jogador pode usar **uma** Ação (seção 6).
+4. **Escolher:** cada jogador separa **1 Visualização + 1 Variável Visual** e as deixa viradas para baixo. Todo mundo joga uma dupla em toda rodada; não existe passar.
+5. **Revelar e justificar:** todos viram as cartas ao mesmo tempo, e cada um justifica a sua dupla em uma frase. A justificativa não vale pontos.
+6. **Conferir:** quem começou a rodada olha a linha do desafio na folha do gabarito, ainda dobrada, e diz os pontos de cada um. Depois abre a dobra e lê em voz alta por que as respostas valem e por que a armadilha erra.
+7. **Segunda Chance:** quem fez 0 e tem a carta Segunda Chance pode jogar outra dupla, conferida do mesmo jeito.
+8. **Fechar a rodada:**
+   - anote os pontos no placar;
+   - as cartas jogadas vão para o descarte do seu tipo, e o desafio sai do jogo;
+   - cada jogador completa a mão até ter 4 Visualizações e 3 Variáveis; quem tiver mais não descarta;
+   - quem fez 0 na rodada compra 1 Ação, se tiver menos de 2;
+   - a vez de começar passa para o jogador à esquerda.
 
-Como as cartas de Ação são parte do baralho, sua utilização deve seguir a indicação de timing da seção 6. Uma partida pode terminar antes de esgotar os 18 desafios.
+### Pontuação
 
-### Pontuação proposta
+O gabarito é **estrito**: só pontuam as duplas listadas em [`gabarito.md`](./gabarito.md), sem defesa nem votação.
 
 | Condição | Pontos |
 |---|---:|
-| Escolha de Visualização adequada ao desafio | +2 |
-| Escolha de Variável Visual adequada à representação e ao desafio | +1 |
-| Combinação preferencial, conforme critérios do desafio | +1 bônus |
-| Combinação totalmente inadequada | 0 |
+| Visualização aceita no desafio | 2 |
+| Variável listada na linha dessa visualização | +1 |
+| Dupla preferida (★) | +1 |
+| Visualização fora da lista | 0 |
 
-- Uma jogada pode somar **0 a 4 pontos**; o bônus só existe se os critérios forem satisfeitos.
-- Uma representação pode ser **válida sem ser a preferida**; o gabarito deve explicar essa diferença.
-- O conjunto de critérios precisa ser escrito e testado para impedir avaliações arbitrárias ou contraditórias.
-- O jogador que chegar a **15 pontos** vence. Se mais de um atingir o limite na mesma rodada e houver empate na maior pontuação, realize um **desafio de desempate**. Caso o monte de Dados se esgote, vence a maior pontuação, com desempate da mesma forma.
+- Uma dupla vale 0, 2, 3 ou 4 pontos. Pontos Dobrados e Desafio Direto podem somar mais (seção 6).
+- A variável só pontua junto com uma visualização aceita.
+
+### Fim da partida e empate
+
+- A partida termina no fim da rodada em que alguém chega a **15 pontos**, e vence quem tiver mais pontos.
+- Em caso de empate, só os empatados jogam mais um desafio. Se empatarem de novo, dividem a vitória.
+- Se os desafios acabarem antes, vence quem tiver mais pontos, com o mesmo desempate. Isso não aconteceu nas simulações.
+
+### Falta de cartas
+
+Se o monte de Visualização, Variável ou Ação acabar, embaralhe o descarte daquele tipo para formar um monte novo.
 
 ### Exemplo de rodada
 
-**Desafio 07 — Densidade populacional:** comparar a densidade populacional entre bairros de uma cidade.
+**Desafio 07, Densidade populacional:** comparar a densidade populacional entre os bairros de uma cidade.
 
-Uma proposta plausível é **Mapa coroplético (26)** + **Cor sequencial (41)**: cada bairro é uma área geográfica e uma escala ordenada de cores representa a densidade. Essa é uma **combinação de exemplo**, não um registro de gabarito oficial finalizado. Um gráfico de barras poderia ser defensável caso a ênfase fosse exclusivamente a comparação de bairros, e não sua posição no espaço.
+- Ana joga **Mapa coroplético (26) + Cor sequencial (41)** e faz 4 pontos: cada bairro é uma área, e uma escala ordenada de cores mostra a densidade. É a dupla preferida (★).
+- Caio joga **Gráfico de barras (19) + Comprimento (37)** e faz 3 pontos: o gabarito aceita barras como ranking dos bairros, quando a posição no espaço não importa.
+- Lia joga **Mapa de símbolos proporcionais (30) + Tamanho proporcional (38)** e faz 0: é a armadilha, porque símbolos proporcionais servem para totais, não para taxas como a densidade.
 
 ## 5. Regras de interpretação e avaliação
+
+Estes princípios orientaram o gabarito. Na mesa, vale o que está em [`gabarito.md`](./gabarito.md).
 
 - **Comece pela pergunta de análise:** o mesmo conjunto de dados pode admitir visualizações diferentes para objetivos diferentes.
 - **Dados categóricos vs. quantitativos:** cor categórica/forma pode distinguir grupos; comprimento/posição ou cor sequencial pode representar quantidade, conforme a técnica.
@@ -84,26 +108,34 @@ Uma proposta plausível é **Mapa coroplético (26)** + **Cor sequencial (41)**:
 - **Não confundir técnica e variável:** “gráfico de linhas” é uma representação; “posição vertical” é um canal visual. Algumas combinações são possíveis, mas pouco informativas; é preciso justificar a codificação.
 - **Acessibilidade e honestidade:** contraste, semântica das cores, escalas e distorções devem ser considerados na avaliação.
 
-**Pendente para tornar o jogo plenamente reproduzível:** criar uma matriz/gabarito de compatibilidade para todos os 18 desafios, com combinações aceitas, preferenciais, inadequadas e respectivas justificativas. O verso das cartas de Dados **não** contém atualmente esse gabarito no HTML.
+**Gabarito:** as duplas aceitas, a dupla preferida e a armadilha de cada um dos 18 desafios, com justificativas, estão em [`gabarito.md`](./gabarito.md). O verso das cartas de Dados **não** contém o gabarito.
 
 ## 6. Cartas de Ação
 
-Há **10 modelos**, cada um com **2 cópias**. Seus efeitos impressos já estão definidos (tabela abaixo). O seguinte protocolo de uso é **provisório**, para permitir testes: no seu turno, o jogador pode usar até **uma** Ação antes de propor a combinação; ela vai para o descarte após resolver o efeito. As ações que se referem à próxima jogada, como Pontos Dobrados, podem permanecer como lembrete até serem consumidas. Ações que criam novos desafios precisam de regras de desempate e descarte consistentes.
+Há **10 modelos**, com **2 cópias** cada.
 
-**Decisões ainda a validar:** se Ação substitui ou acompanha a jogada; quando exatamente pode ser usada; como tratar Bloqueio quando só há dois participantes; o que acontece com um desafio substituído; e como resolver a falta de cartas para compra. Até o playtest, priorize o texto de cada carta e o consenso da mesa.
+### Quando usar
 
-| ID | Carta | Aplicação / efeito | Cópias |
-|---|---|---|---:|
-| 51 | Troca de Mão | Troque suas cartas com outro jogador. | 2 |
-| 52 | Compra Forçada | Escolha um adversário para comprar duas cartas. | 2 |
-| 53 | Bloqueio | Impeça um adversário de participar da próxima rodada. | 2 |
-| 54 | Segunda Chance | Tente uma nova combinação após uma resposta inadequada. | 2 |
-| 55 | Pontos Dobrados | Dobre os pontos obtidos na sua próxima combinação válida. | 2 |
-| 56 | Desafio Surpresa | Substitua o desafio atual por outro do baralho. | 2 |
-| 57 | Roubo de Carta | Retire aleatoriamente uma carta da mão de outro jogador. | 2 |
-| 58 | Troca Estratégica | Descarte até três cartas e compre a mesma quantidade. | 2 |
-| 59 | Desafio Direto | Escolha um adversário para competir em um novo desafio; quem pontuar mais ganha dois pontos adicionais. | 2 |
-| 60 | Visão Privilegiada | Consulte as respostas aceitas de um desafio antes de jogar suas cartas. | 2 |
+- Cada jogador pode usar **uma Ação por rodada**, na sua vez, depois da revelação do desafio e antes da escolha das duplas.
+- Há duas exceções de momento, e as duas contam como a Ação da rodada: **Pontos Dobrados** é usada antes da revelação, como aposta, e **Segunda Chance**, depois da conferência.
+- A Ação usada vai para o descarte de Ações.
+- Cada jogador começa com 1 Ação. Quem fizer 0 numa rodada compra 1 Ação no fim dela, se tiver menos de 2.
+- Com 2 jogadores, todas as Ações continuam no jogo.
+
+### Efeitos
+
+| ID | Carta | Texto da carta | Detalhes |
+|---|---|---|---|
+| 51 | Troca de Mão | Troque suas cartas com um adversário. Ele rola o dado: com 5 ou 6, escapa. | Trocam-se as Visualizações e as Variáveis; as Ações ficam com cada um. Se o alvo escapar, a carta é gasta mesmo assim. |
+| 52 | Compra Extra | Role o dado e compre 1 carta (1–2), 2 (3–4) ou 3 (5–6), de Visualização ou de Variável, como quiser. | As cartas extras ficam na mão; a reposição nunca obriga a descartar. |
+| 53 | Bloqueio | Impeça um adversário de jogar a próxima rodada. Ele rola o dado: com 5 ou 6, escapa. | O bloqueado fica fora da rodada inteira: não aposta, não usa nem compra Ação e não joga dupla. Se fosse a vez dele de começar, começa quem está à esquerda. |
+| 54 | Segunda Chance | Tente uma nova combinação após uma resposta inadequada. | Só depois da conferência, se a sua dupla valeu 0. A nova dupla é conferida normalmente. |
+| 55 | Pontos Dobrados | Antes de revelar o desafio, aposte: se a sua dupla desta rodada pontuar, os pontos dobram. | Se a dupla não pontuar, a carta é perdida. Vale também para a dupla da Segunda Chance; os +2 do Desafio Direto não dobram. |
+| 56 | Desafio Surpresa | Substitua o desafio atual por outro do baralho. | O novo desafio vale para todos; o antigo vai para o fundo do monte de Dados. |
+| 57 | Roubo de Carta | Todos os adversários rolam o dado. Quem tirar 1 ou 2 entrega a você 1 carta ao acaso. | A carta sai da mão inteira do adversário e pode ser uma Ação. |
+| 58 | Troca Estratégica | Descarte até três cartas e compre a mesma quantidade. | Compre do mesmo tipo das descartadas (Visualização ou Variável). |
+| 59 | Desafio Direto | Escolha um adversário. Nesta rodada, quem fizer mais pontos entre vocês dois ganha +2. Empate com pontos: rolem o dado. | Se os dois fizerem 0, ninguém ganha. No empate com pontos, quem tirar mais no dado leva os +2; se empatar no dado, rolem de novo. |
+| 60 | Visão Privilegiada | Consulte as respostas aceitas de um desafio antes de jogar suas cartas. | Olhe sozinho a linha do desafio da rodada na folha dobrada, sem abrir as justificativas. |
 
 ## 7. Catálogo completo de cartas
 
@@ -160,46 +192,56 @@ Seis desafios tratam de codificação/percepção visual (01–06), seis de geoe
 | 35 | Posição horizontal | Valores em um eixo X. | 2 |
 | 36 | Posição vertical | Valores em um eixo Y. | 2 |
 | 37 | Comprimento | Comparação de magnitudes. | 2 |
-| 38 | Tamanho proporcional | Magnitude por tamanho. | 2 |
-| 39 | Área proporcional | Quantidades por área. | 2 |
+| 38 | Tamanho proporcional | Magnitude pelo tamanho de símbolos (círculos, ícones). | 2 |
+| 39 | Área proporcional | Quantidades pela área de fatias, faixas ou regiões. | 2 |
 | 40 | Cor categórica | Diferenciação de grupos. | 2 |
 | 41 | Cor sequencial | Valores numéricos ordenados. | 2 |
 | 42 | Cor divergente | Valores em torno de uma referência. | 2 |
 | 43 | Saturação da cor | Variação de intensidade. | 2 |
 | 44 | Luminosidade | Ordenação por claro e escuro. | 2 |
 | 45 | Forma geométrica | Diferenciação de categorias. | 2 |
-| 46 | Orientação | Distinção visual por direção. | 2 |
+| 46 | Orientação | Diferenciação pela inclinação da marca. | 2 |
 | 47 | Textura | Diferenciação por padrões. | 2 |
 | 48 | Espessura de linha | Codificação de intensidade ou magnitude. | 2 |
 | 49 | Posição geográfica | Localização por coordenadas. | 2 |
 | 50 | Direção do movimento | Indicação de sentido de fluxos. | 2 |
 
-Alguns itens (por exemplo, **área proporcional** e **tamanho proporcional**) têm sobreposição conceitual deliberada no protótipo; as definições podem ser refinadas para evitar ambiguidade. Além disso, mapas e séries temporais podem exigir **mais de um canal visual** na prática, mesmo que a mecânica inicial peça uma só carta de Variável Visual.
+**Tamanho proporcional** (38) vale para símbolos, como círculos e ícones; **Área proporcional** (39), para fatias, faixas e regiões. **Orientação** (46) é a inclinação da marca; **Direção do movimento** (50), o sentido de um fluxo. Além disso, mapas e séries temporais podem exigir **mais de um canal visual** na prática, mesmo que a mecânica peça uma só carta de Variável Visual.
 
-## 8. Arquivo HTML e impressão
+## 8. Arquivos HTML e impressão
 
-O artefato imprimível atual é [`Chart_Battle_102_cartas_A4.html`](./Chart_Battle_102_cartas_A4.html). Trata-se de um **documento HTML estático e autocontido**, com CSS e ilustrações vetoriais inline; **não é um jogo digital interativo** e não implementa regras, pontuação ou validação.
+Há três arquivos para imprimir, todos **HTML estáticos e autocontidos**, com CSS e ilustrações vetoriais inline, que funcionam sem internet:
+
+- [`Chart_Battle_102_cartas_A4.html`](./Chart_Battle_102_cartas_A4.html): as 102 cartas, em 12 folhas;
+- [`Chart_Battle_gabarito_A4.html`](./Chart_Battle_gabarito_A4.html): o gabarito, em 1 folha;
+- [`Chart_Battle_colinha_A4.html`](./Chart_Battle_colinha_A4.html): a colinha com as regras resumidas, em 1 folha, só frente.
+
+Nenhum deles **é um jogo digital interativo** nem implementa regras, pontuação ou validação.
 
 ### Características técnicas já presentes
 
 - **102 cartas** distribuídas em **12 páginas A4** com até **9 cartas por página**, na grade de 3 colunas × 3 linhas (11 páginas completas e uma página com 3 cartas).
-- Página A4 retrato (**210 × 297 mm**), com **margem interna de 10 mm** em CSS.
+- Página A4 retrato (**210 × 297 mm**), com **margem interna de 10 mm** em CSS. A grade das cartas fica centralizada: **10,5 mm** nas laterais e **13,5 mm** em cima e embaixo.
 - Cada carta mede aproximadamente **61 × 88 mm**; espaçamento entre cartas de **3 mm**.
 - Cores do layout por categoria: **Dados = azul-escuro/azul-claro**, **Visualização = violeta/lilás**, **Variáveis Visuais = verde/verde-claro**, **Ação = rosa/magenta-rosado**.
 - As cores das **figuras internas são livres** e **não devem ser forçadas à paleta do cabeçalho**.
 - **Dados sem figuras**; outras categorias com ilustrações SVG.
 - Barra de impressão no navegador e estilos específicos para `@media print`.
 
+### Folha do gabarito
+
+Uma folha A4 com uma linha tracejada no meio. À esquerda ficam só números: o desafio, as visualizações aceitas com as suas variáveis (★ marca a dupla preferida) e a armadilha. À direita ficam as justificativas. Depois de imprimir, dobre a folha para trás na linha tracejada: quem confere vê só os números e abre a dobra para ler os porquês.
+
 ### Como imprimir ou exportar PDF
 
-1. Baixe/abra `Chart_Battle_102_cartas_A4.html` em um navegador moderno.
+1. Baixe/abra o arquivo em um navegador moderno.
 2. Clique em **Imprimir / Salvar em PDF** (ou use `Ctrl+P`).
-3. Selecione **A4**, **retrato**, **100%** de escala e **sem margens adicionais** no navegador (o documento já reserva 1 cm em cada lado).
+3. Selecione **A4**, **retrato**, **100%** de escala e **sem margens adicionais** no navegador (o documento já reserva a margem).
 4. Ative **gráficos/cores de fundo**, quando o navegador oferecer essa opção.
 5. Desative cabeçalhos e rodapés gerados pelo navegador; confira a pré-visualização antes de cortar.
-6. Recorte as cartas pelas bordas. Para cartas opacas e duráveis, use papel mais firme, plástico protetor ou sleeves.
+6. Recorte as cartas pelas bordas. Para cartas opacas e duráveis, use papel mais firme, plástico protetor ou sleeves. A folha do gabarito não é recortada, só dobrada.
 
-**Nota:** o CSS usa `@page { size: A4 portrait; margin: 0 }` para que a folha incorpore a própria margem de 10 mm. A margem física e a escala devem ser verificadas em impressão-teste. Não imprimir com “ajustar à página” se isso redimensionar as cartas.
+**Nota:** o CSS usa `@page { size: A4 portrait; margin: 0 }` para que a folha incorpore a própria margem de 10 mm. A margem física e a escala devem ser verificadas em impressão-teste. Não imprimir com “ajustar à página” se isso redimensionar as cartas. No PDF gerado pelo Firefox em 24/11/2026, as medidas conferem: 12 páginas de cartas com as margens acima, e o gabarito e a colinha em 1 página cada.
 
 ## 9. Estrutura mínima sugerida do repositório
 
@@ -207,20 +249,26 @@ O artefato imprimível atual é [`Chart_Battle_102_cartas_A4.html`](./Chart_Batt
 chart-battle/
 ├── README.md
 ├── AGENTS.md
-└── Chart_Battle_102_cartas_A4.html
+├── gabarito.md
+├── colinha.md
+├── Chart_Battle_102_cartas_A4.html
+├── Chart_Battle_gabarito_A4.html
+├── Chart_Battle_colinha_A4.html
+└── 2026_2_Jogos_enunciado.pdf
 ```
 
 Ainda não há sistema de build, framework JavaScript, testes automatizados, arquivos de dados separados ou licença definida. Uma evolução possível é extrair as 60 definições para um JSON/YAML e gerar o HTML a partir de um template, mantendo gabarito e regras versionados.
 
 ## 10. Próximas etapas
 
-- [ ] Definir e revisar a **matriz de compatibilidade** das 18 cartas de Dados com cartas de Visualização e Variável Visual.
-- [ ] Fixar o momento de uso e resolução das **10 Ações**, inclusive casos de disputa e falta de cartas.
-- [ ] Realizar playtests com **2, 3, 4 e 6 pessoas**, registrando duração, taxa de mãos sem combinação e frequência de ações.
-- [ ] Ajustar balanceamento do monte de 84 cartas e a meta de 15 pontos conforme evidências.
-- [ ] Revisar a precisão conceitual dos exemplos de visualização e suas legendas.
-- [ ] Testar impressão real em A4, conferindo margem de 1 cm, corte e legibilidade.
-- [ ] Opcional: criar o **verso das cartas**, manual de regras diagramado e fichas de pontuação.
+- [x] Definir e revisar a **matriz de compatibilidade** das 18 cartas de Dados com cartas de Visualização e Variável Visual ([`gabarito.md`](./gabarito.md)).
+- [x] Fixar o momento de uso e resolução das **10 Ações**, inclusive casos de disputa e falta de cartas (seções 4 e 6).
+- [ ] Realizar playtests com **2, 3, 4 e 6 pessoas**, registrando duração, taxa de mãos sem combinação e frequência de ações. A simulação já foi feita (seção 12); faltam partidas reais.
+- [x] Ajustar o balanceamento dos montes e a meta de 15 pontos, por simulação (seção 12).
+- [x] Revisar a precisão conceitual dos exemplos de visualização e suas legendas: histograma, boxplot, mapa de calor, saturação, direção do movimento, cor única nos canais visuais e legendas 38, 39 e 46.
+- [ ] Testar impressão real em A4, conferindo margem, corte e legibilidade. O PDF pelo Firefox foi conferido em 24/11/2026; falta imprimir em papel.
+- [x] Colinha de regras em 1 folha, com exemplo de placar ([`colinha.md`](./colinha.md), [`Chart_Battle_colinha_A4.html`](./Chart_Battle_colinha_A4.html)).
+- [ ] Opcional: criar o **verso das cartas**.
 - [ ] Opcional: automatizar a geração do baralho, o gabarito e os testes estruturais.
 
 ## 11. Convenções do projeto
@@ -230,6 +278,62 @@ Ainda não há sistema de build, framework JavaScript, testes automatizados, arq
 - **Princípio didático:** valorizar justificativa e adequação ao objetivo, não apenas respostas por associação mecânica.
 - **Escopo:** projeto acadêmico de prototipação, não produto finalizado ou jogo digital completo.
 
+## 12. Balanceamento (simulação)
+
+As regras das seções 3, 4 e 6 foram escolhidas com uma simulação de Monte Carlo: milhares de partidas por cenário, com jogadores que às vezes erram a melhor dupla e com o gabarito de [`gabarito.md`](./gabarito.md). O script da simulação não faz parte do repositório. **Simulação não substitui playtest:** os números abaixo mostram tendências, não o comportamento de uma turma real.
+
+### Por que as regras mudaram
+
+Com as regras anteriores (monte único de 84 cartas, mão de 5, jogadas em ordem):
+
+- 17% das mãos iniciais não formavam nenhuma dupla, e a mão inicial respondia só 25% dos desafios;
+- 87% das jogadas valiam 0, uma média de 0,34 ponto por jogador por rodada;
+- em 62% a 87% das partidas, os 18 desafios acabavam antes de alguém chegar a 15 pontos.
+
+Com os quatro montes e a mão de 4 Visualizações + 3 Variáveis, a mão inicial responde 53% dos desafios, 47% das jogadas valem 0, cada jogador faz cerca de 1,4 ponto por rodada e todas as partidas simuladas terminaram pela meta.
+
+### Duração com meta de 15 pontos
+
+| Jogadores | Rodadas (mediana) | 80% das partidas | Empate no topo |
+|---|---:|---|---:|
+| 2 | 10 | 7 a 13 | 3% |
+| 3 | 9 | 7 a 12 | 5% |
+| 4 | 9 | 7 a 11 | 6% |
+| 6 | 8 | 6 a 10 | 7% |
+
+### Peso do conhecimento
+
+Um jogador que sempre escolhe a melhor dupla da mão vence 39% das partidas de 4 jogadores (o acaso daria 25%) e 64% das partidas de 2 (o acaso daria 50%). O que mais pesa é ter a visualização certa na mão.
+
+### Dificuldade dos desafios
+
+A chance de a mão inicial ter uma dupla que pontua vai de 23% a 24% nos desafios 02 e 06, que só aceitam barras, até 86% no desafio 14. A média é 52%.
+
+### Força das Ações
+
+Chance de vencer de quem começa a partida com a carta. Sem carta extra, a chance é de 25% com 4 jogadores e de 50% com 2.
+
+| Carta | 4 jogadores | 2 jogadores |
+|---|---:|---:|
+| Pontos Dobrados | 34% | 57% |
+| Desafio Direto | 31% | 53% |
+| Troca de Mão | 30% | 58% |
+| Troca Estratégica | 30% | 55% |
+| Desafio Surpresa | 29% | 55% |
+| Bloqueio | 27% | 56% |
+| Compra Extra | 27% | 52% |
+| Roubo de Carta | 26% | 50% |
+| Segunda Chance | 26% | 52% |
+| Visão Privilegiada | 25% | 52% |
+
+Decisões que vieram daí:
+
+- **Compra Forçada** virou **Compra Extra**. Como estava, ela dava cartas ao adversário e subia a chance dele de responder de 53% para 61% a 68%.
+- **Pontos Dobrados** virou aposta. Dobrando a próxima dupla válida, quem começava com ela vencia de 37% a 42% das partidas de 4.
+- **Troca de Mão** e **Bloqueio** ganharam a defesa no dado. Sem ela, com 2 jogadores, levavam a chance de vencer a 61% e 59%.
+- **Roubo de Carta** virou uma rolagem coletiva, para pôr o dado em jogo; a força dela quase não mudou.
+- **Segunda Chance** e **Visão Privilegiada** continuam fracas, mas não atrapalham, e a Visão Privilegiada tem valor didático.
+
 ---
 
-*Documento alinhado ao protótipo HTML atual e às decisões de design registradas até 23/11/2026.*
+*Documento alinhado ao protótipo HTML atual e às decisões de design registradas até 24/11/2026.*
