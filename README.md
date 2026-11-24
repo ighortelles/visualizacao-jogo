@@ -191,21 +191,21 @@ Seis desafios tratam de codificação/percepção visual (01–06), seis de geoe
 | 35 | Posição horizontal | Valores em um eixo X. | 2 |
 | 36 | Posição vertical | Valores em um eixo Y. | 2 |
 | 37 | Comprimento | Comparação de magnitudes. | 2 |
-| 38 | Tamanho proporcional | Magnitude por tamanho. | 2 |
-| 39 | Área proporcional | Quantidades por área. | 2 |
+| 38 | Tamanho proporcional | Magnitude pelo tamanho de símbolos (círculos, ícones). | 2 |
+| 39 | Área proporcional | Quantidades pela área de fatias, faixas ou regiões. | 2 |
 | 40 | Cor categórica | Diferenciação de grupos. | 2 |
 | 41 | Cor sequencial | Valores numéricos ordenados. | 2 |
 | 42 | Cor divergente | Valores em torno de uma referência. | 2 |
 | 43 | Saturação da cor | Variação de intensidade. | 2 |
 | 44 | Luminosidade | Ordenação por claro e escuro. | 2 |
 | 45 | Forma geométrica | Diferenciação de categorias. | 2 |
-| 46 | Orientação | Distinção visual por direção. | 2 |
+| 46 | Orientação | Diferenciação pela inclinação da marca. | 2 |
 | 47 | Textura | Diferenciação por padrões. | 2 |
 | 48 | Espessura de linha | Codificação de intensidade ou magnitude. | 2 |
 | 49 | Posição geográfica | Localização por coordenadas. | 2 |
 | 50 | Direção do movimento | Indicação de sentido de fluxos. | 2 |
 
-Alguns itens (por exemplo, **área proporcional** e **tamanho proporcional**) têm sobreposição conceitual deliberada no protótipo; as definições podem ser refinadas para evitar ambiguidade. Além disso, mapas e séries temporais podem exigir **mais de um canal visual** na prática, mesmo que a mecânica inicial peça uma só carta de Variável Visual.
+**Tamanho proporcional** (38) vale para símbolos, como círculos e ícones; **Área proporcional** (39), para fatias, faixas e regiões. **Orientação** (46) é a inclinação da marca; **Direção do movimento** (50), o sentido de um fluxo. Além disso, mapas e séries temporais podem exigir **mais de um canal visual** na prática, mesmo que a mecânica peça uma só carta de Variável Visual.
 
 ## 8. Arquivo HTML e impressão
 
@@ -251,7 +251,7 @@ Ainda não há sistema de build, framework JavaScript, testes automatizados, arq
 - [x] Fixar o momento de uso e resolução das **10 Ações**, inclusive casos de disputa e falta de cartas (seções 4 e 6).
 - [ ] Realizar playtests com **2, 3, 4 e 6 pessoas**, registrando duração, taxa de mãos sem combinação e frequência de ações. A simulação já foi feita (seção 12); faltam partidas reais.
 - [x] Ajustar o balanceamento dos montes e a meta de 15 pontos, por simulação (seção 12).
-- [ ] Revisar a precisão conceitual dos exemplos de visualização e suas legendas.
+- [x] Revisar a precisão conceitual dos exemplos de visualização e suas legendas: histograma, boxplot, mapa de calor, saturação, direção do movimento, cor única nos canais visuais e legendas 38, 39 e 46.
 - [ ] Testar impressão real em A4, conferindo margem de 1 cm, corte e legibilidade.
 - [ ] Opcional: criar o **verso das cartas**, manual de regras diagramado e fichas de pontuação.
 - [ ] Opcional: automatizar a geração do baralho, o gabarito e os testes estruturais.
