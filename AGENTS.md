@@ -4,11 +4,11 @@ Este arquivo orienta agentes que leem, editam, revisam ou geram arquivos no repo
 
 ## Missão
 
-Preservar e evoluir um jogo físico de cartas competitivo e educativo que ensina escolhas de representação visual para **variáveis visuais**, **dados geoespaciais** e **séries temporais**. Há um HTML estático imprimível e uma proposta de regras. **Não apresente o protótipo como jogo digital funcional.**
+Preservar e evoluir um jogo físico de cartas competitivo e educativo que ensina escolhas de representação visual para **variáveis visuais**, **dados geoespaciais** e **séries temporais**. Há um HTML estático imprimível, regras decididas pelo grupo (testadas só por simulação) e um gabarito estrito. **Não apresente o protótipo como jogo digital funcional.**
 
 ## Fonte de verdade e estado atual
 
-1. `README.md`: descrição, regras **propostas**, categorias, catálogo e pontos ainda abertos.
+1. `README.md`: descrição, regras, Ações, catálogo, balanceamento por simulação e pontos ainda abertos.
 2. `Chart_Battle_102_cartas_A4.html`: **implementação atual** das cartas e do layout imprimível; referência para texto, IDs e duplicação física.
 3. `gabarito.md`: gabarito estrito dos 18 desafios (duplas aceitas, dupla preferida, armadilha e justificativas).
 4. `AGENTS.md`: restrições e checklist para trabalho de agentes, não substitui o catálogo.
@@ -30,7 +30,7 @@ Se houver divergência entre documentação e HTML, **informe a divergência** e
 - Manter a **cor do cabeçalho e do fundo por categoria**; cores de **gráficos/ilustrações internos são independentes**, sem obrigação de monocromia.
 - Paleta **atual do HTML**: Dados azul; Visualização violeta; Variáveis Visuais verde; Ação rosa/magenta. Não misturar identidades entre categorias, nem assumir que toda ilustração deve ter a cor da categoria.
 - Manter o idioma `pt-BR`, acentuação, títulos legíveis e sem cortes.
-- Preservar a separação entre **18 cartas de desafio** e **84 cartas de jogador** na documentação de regras.
+- Preservar os **quatro montes** separados nas regras: Dados (18), Visualização (32), Variável Visual (32) e Ação (20).
 - Não declarar como implementado nenhum gabarito, bot, sistema de jogo, pontuação automática ou testes que não existam no repositório.
 
 ## HTML e restrições de impressão
@@ -57,14 +57,13 @@ Se quiser refatorar para geração baseada em dados, preserve a saída HTML est�
 
 ## Regras e limites de implementação
 
-A mecânica **proposta**, não validada, é: dar 5 cartas por participante do monte de 84; revelar 1 carta de Dados; em ordem, cada jogador apresenta 1 Visualização + 1 Variável Visual (ou passa), justifica a escolha e pontua; repõe a mão até 5 quando possível; segue-se para o próximo desafio. Pontos: **+2** representação adequada, **+1** variável adequada, **+1** bônus por combinação preferencial, **0** para combinação inteiramente inadequada; objetivo provisório **15 pontos**. As ações têm efeitos descritos nas cartas e timing ainda em aberto.
+As regras estão nas seções 3, 4 e 6 do README e foram decididas pelo grupo em 24/11/2026: quatro montes separados; mão de 4 Visualizações, 3 Variáveis Visuais e 1 Ação; todos respondem ao mesmo desafio ao mesmo tempo e justificam em uma frase; quem começou a rodada confere no gabarito estrito; pontos **+2** visualização aceita, **+1** variável listada, **+1** dupla preferida (★); meta de **15 pontos**; uma Ação por rodada; cinco Ações usam um dado de 6 lados. O balanceamento foi testado só por simulação (README, seção 12).
 
 **Nunca invente ou cristalize como definitivo**:
 
 - Mudanças no gabarito (`gabarito.md`) sem decisão explícita do grupo.
-- Regras de timing/limite das Ações, além da proposta explicitada no README.
-- Comportamento em falta de cartas, bloqueio em partidas de 2 jogadores e desafios substituídos.
-- Alegações de que a duração e o balanceamento foram comprovados por playtests.
+- Mudanças nas regras ou nos textos das Ações sem decisão explícita do grupo. Ao mudar o texto de uma Ação, atualize juntos o HTML e a seção 6 do README.
+- Alegações de que a duração e o balanceamento foram comprovados por playtests: os números do README vêm de simulação.
 
 Ao propor novas regras, indique **“proposta”** e atualize documentação apenas depois de uma decisão explícita ou de um teste registrado. **Aceite múltiplas codificações válidas quando a justificativa e a pergunta de análise permitirem.**
 
@@ -98,6 +97,8 @@ Ao propor novas regras, indique **“proposta”** e atualize documentação ape
 - [ ] Nenhum texto aparece fora da borda ou cortado na impressão.
 - [ ] HTML abre offline sem imagens ou bibliotecas externas.
 - [ ] README e AGENTS refletem alterações relevantes de contrato/escopo.
+- [ ] Textos das Ações iguais no HTML e na seção 6 do README.
+- [ ] `gabarito.md` só usa números e nomes de cartas que existem no HTML.
 
 ### Exemplo de verificação rápida (Python + BeautifulSoup, se disponível)
 
@@ -127,11 +128,10 @@ assert all(card.select_one(".illustration") is None for card in soup.select(".ca
 
 ## Prioridades para contribuições futuras
 
-1. **Gabarito e matriz de compatibilidade** (justificativas, múltiplas respostas válidas, melhores respostas).
-2. **Regras completas das Ações** e solução de condições de borda.
-3. **Playtesting e balanceamento** do baralho misto e da pontuação.
-4. **Automação da geração** das cartas a partir de fonte estruturada, se útil.
-5. Verso das cartas, identidade visual de corte, testes automatizados e acessibilidade.
+1. **Playtests reais** com 2, 3, 4 e 6 pessoas, registrando duração, dúvidas de regra e desafios difíceis.
+2. **Ajustes no gabarito e nas regras** a partir dos playtests, sempre com decisão do grupo.
+3. **Automação da geração** das cartas a partir de fonte estruturada, se útil.
+4. Verso das cartas, identidade visual de corte, testes automatizados e acessibilidade.
 
 ## Comunicação de mudanças
 
