@@ -2,7 +2,7 @@
 
 Jogo educativo e competitivo de cartas para a disciplina de **Visualização de Dados**, com foco em **variáveis visuais**, **visualização de dados geoespaciais** e **visualização de séries temporais**.
 
-> **Status do projeto:** protótipo físico em desenvolvimento. O baralho de 102 cartas já está representado em um HTML estático para impressão; as regras e a pontuação abaixo são a proposta atual, ainda sujeita a testes. **Não há gabarito completo nem mecanismo de validação automática implementado.**
+> **Status do projeto:** protótipo físico em desenvolvimento. O baralho de 102 cartas já está representado em um HTML estático para impressão; as regras e a pontuação abaixo são a proposta atual, ainda sujeita a testes. O gabarito dos 18 desafios está em [`gabarito.md`](./gabarito.md); **não há mecanismo de validação automática implementado.**
 
 ## 1. Conceito e objetivo
 
@@ -47,7 +47,7 @@ A sugestão de faixa para o protótipo é **2–6 jogadores**, com duração est
 1. **Revelar o desafio:** apresente uma carta de Dados e leia o problema em voz alta.
 2. **Propor uma representação:** seguindo a ordem de turnos, cada participante pode baixar **1 carta de Visualização + 1 carta de Variável Visual** que, juntas, respondam ao desafio, ou passar.
 3. **Justificar:** o jogador explica brevemente por que a escolha atende à pergunta e que propriedade dos dados será codificada pela variável visual.
-4. **Avaliar:** compare a proposta com o gabarito do desafio (ainda a produzir); diferentes combinações podem ser aceitas, desde que justificadas.
+4. **Avaliar:** compare a proposta com o gabarito do desafio ([`gabarito.md`](./gabarito.md)); só pontuam as duplas listadas no gabarito, sem defesa.
 5. **Aplicar a pontuação:** registre a pontuação obtida conforme a tabela abaixo.
 6. **Repor a mão:** após resolver as jogadas, cada jogador que utilizou cartas compra do monte dos jogadores até retornar a **5 cartas**, caso haja cartas disponíveis.
 7. **Encerrar a rodada:** descarte o desafio utilizado e revele outro para a próxima rodada.
@@ -72,7 +72,7 @@ Como as cartas de Ação são parte do baralho, sua utilização deve seguir a i
 
 **Desafio 07 — Densidade populacional:** comparar a densidade populacional entre bairros de uma cidade.
 
-Uma proposta plausível é **Mapa coroplético (26)** + **Cor sequencial (41)**: cada bairro é uma área geográfica e uma escala ordenada de cores representa a densidade. Essa é uma **combinação de exemplo**, não um registro de gabarito oficial finalizado. Um gráfico de barras poderia ser defensável caso a ênfase fosse exclusivamente a comparação de bairros, e não sua posição no espaço.
+Uma proposta plausível é **Mapa coroplético (26)** + **Cor sequencial (41)**: cada bairro é uma área geográfica e uma escala ordenada de cores representa a densidade. Essa é a **dupla preferida (★)** do gabarito. O gabarito também aceita um gráfico de barras como ranking dos bairros, quando a posição no espaço não importa.
 
 ## 5. Regras de interpretação e avaliação
 
@@ -84,7 +84,7 @@ Uma proposta plausível é **Mapa coroplético (26)** + **Cor sequencial (41)**:
 - **Não confundir técnica e variável:** “gráfico de linhas” é uma representação; “posição vertical” é um canal visual. Algumas combinações são possíveis, mas pouco informativas; é preciso justificar a codificação.
 - **Acessibilidade e honestidade:** contraste, semântica das cores, escalas e distorções devem ser considerados na avaliação.
 
-**Pendente para tornar o jogo plenamente reproduzível:** criar uma matriz/gabarito de compatibilidade para todos os 18 desafios, com combinações aceitas, preferenciais, inadequadas e respectivas justificativas. O verso das cartas de Dados **não** contém atualmente esse gabarito no HTML.
+**Gabarito:** as duplas aceitas, a dupla preferida e a armadilha de cada um dos 18 desafios, com justificativas, estão em [`gabarito.md`](./gabarito.md). O verso das cartas de Dados **não** contém o gabarito.
 
 ## 6. Cartas de Ação
 
@@ -214,7 +214,7 @@ Ainda não há sistema de build, framework JavaScript, testes automatizados, arq
 
 ## 10. Próximas etapas
 
-- [ ] Definir e revisar a **matriz de compatibilidade** das 18 cartas de Dados com cartas de Visualização e Variável Visual.
+- [x] Definir e revisar a **matriz de compatibilidade** das 18 cartas de Dados com cartas de Visualização e Variável Visual ([`gabarito.md`](./gabarito.md)).
 - [ ] Fixar o momento de uso e resolução das **10 Ações**, inclusive casos de disputa e falta de cartas.
 - [ ] Realizar playtests com **2, 3, 4 e 6 pessoas**, registrando duração, taxa de mãos sem combinação e frequência de ações.
 - [ ] Ajustar balanceamento do monte de 84 cartas e a meta de 15 pontos conforme evidências.

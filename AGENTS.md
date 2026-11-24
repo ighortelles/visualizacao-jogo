@@ -10,7 +10,8 @@ Preservar e evoluir um jogo físico de cartas competitivo e educativo que ensina
 
 1. `README.md`: descrição, regras **propostas**, categorias, catálogo e pontos ainda abertos.
 2. `Chart_Battle_102_cartas_A4.html`: **implementação atual** das cartas e do layout imprimível; referência para texto, IDs e duplicação física.
-3. `AGENTS.md`: restrições e checklist para trabalho de agentes, não substitui o catálogo.
+3. `gabarito.md`: gabarito estrito dos 18 desafios (duplas aceitas, dupla preferida, armadilha e justificativas).
+4. `AGENTS.md`: restrições e checklist para trabalho de agentes, não substitui o catálogo.
 
 Se houver divergência entre documentação e HTML, **informe a divergência** e proponha a reconciliação; não mude silenciosamente conteúdo, cores ou contagem. Registre ajustes importantes em ambos os documentos quando aplicável.
 
@@ -60,7 +61,7 @@ A mecânica **proposta**, não validada, é: dar 5 cartas por participante do mo
 
 **Nunca invente ou cristalize como definitivo**:
 
-- Gabarito completo, combinatória de respostas preferenciais ou penalidades.
+- Mudanças no gabarito (`gabarito.md`) sem decisão explícita do grupo.
 - Regras de timing/limite das Ações, além da proposta explicitada no README.
 - Comportamento em falta de cartas, bloqueio em partidas de 2 jogadores e desafios substituídos.
 - Alegações de que a duração e o balanceamento foram comprovados por playtests.
