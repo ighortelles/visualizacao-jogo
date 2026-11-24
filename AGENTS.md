@@ -11,7 +11,8 @@ Preservar e evoluir um jogo físico de cartas competitivo e educativo que ensina
 1. `README.md`: descrição, regras, Ações, catálogo, balanceamento por simulação e pontos ainda abertos.
 2. `Chart_Battle_102_cartas_A4.html`: **implementação atual** das cartas e do layout imprimível; referência para texto, IDs e duplicação física.
 3. `gabarito.md`: gabarito estrito dos 18 desafios (duplas aceitas, dupla preferida, armadilha e justificativas).
-4. `AGENTS.md`: restrições e checklist para trabalho de agentes, não substitui o catálogo.
+4. `Chart_Battle_gabarito_A4.html`: folha imprimível do gabarito, com exatamente os mesmos números e justificativas de `gabarito.md`.
+5. `AGENTS.md`: restrições e checklist para trabalho de agentes, não substitui o catálogo.
 
 Se houver divergência entre documentação e HTML, **informe a divergência** e proponha a reconciliação; não mude silenciosamente conteúdo, cores ou contagem. Registre ajustes importantes em ambos os documentos quando aplicável.
 
@@ -35,10 +36,12 @@ Se houver divergência entre documentação e HTML, **informe a divergência** e
 
 ## HTML e restrições de impressão
 
-- Artefato atual: **HTML/CSS autocontido**, com SVGs inline e sem dependências remotas; deve funcionar offline.
+- Artefatos: dois **HTML/CSS autocontidos**, `Chart_Battle_102_cartas_A4.html` (cartas) e `Chart_Battle_gabarito_A4.html` (gabarito), com SVGs inline e sem dependências remotas; devem funcionar offline.
 - **A4 retrato: 210 × 297 mm**, margem **interna** de **10 mm** em todos os lados.
 - Páginas `.sheet` de 210 × 297 mm e grade `.card-grid` de 190 × 277 mm, com **3 colunas × 3 linhas**.
 - Cartões `.card` com **61 × 88 mm** e espaçamento **3 mm**. Máximo 9 por folha, **12 folhas** para 102 cartas.
+- A grade `.card-grid` é centralizada na folha (`justify-content` e `align-content: center`): margens efetivas de **10,5 mm** nas laterais e **13,5 mm** em cima e embaixo.
+- A folha do gabarito é **uma única página A4**, com a dobra em **105 mm**: à esquerda só números, à direita as justificativas. Não deixe a tabela passar de uma página.
 - `@media print` deve ocultar elementos de interface (`.toolbar`, `.notes`) e evitar margens extras e escalas automáticas.
 - A regra `@page { size: A4 portrait; margin: 0; }` é intencional: a margem de 1 cm está **dentro da folha**; margens adicionais do navegador prejudicam dimensões.
 - Preserve quebras de página, não deixe cartas partidas ou conteúdo cortado. Verifique a última página (3 cartas).
@@ -52,6 +55,7 @@ Se houver divergência entre documentação e HTML, **informe a divergência** e
 - As cartas de Dados usam `.body.data-only`, `.data-tag`, `h2` e `p` — **sem `.illustration`**.
 - As outras usam `h2`, `.illustration` contendo um SVG e `.caption`.
 - Não há JavaScript de aplicação; há apenas o botão HTML de impressão (`window.print()`).
+- No gabarito, cada desafio é uma linha `tr[data-desafio]`. Visualizações usam `.chip.v`, variáveis `.chip.r` (`.chip.r.star` para a dupla preferida) e armadilhas `.chip.x`.
 
 Se quiser refatorar para geração baseada em dados, preserve a saída HTML estática, as classes de categoria ou um contrato equivalente, e a correspondência 1:1 com os IDs e textos aprovados. Evite introduzir dependências externas desnecessárias.
 
@@ -61,7 +65,7 @@ As regras estão nas seções 3, 4 e 6 do README e foram decididas pelo grupo em
 
 **Nunca invente ou cristalize como definitivo**:
 
-- Mudanças no gabarito (`gabarito.md`) sem decisão explícita do grupo.
+- Mudanças no gabarito sem decisão explícita do grupo. `gabarito.md` e `Chart_Battle_gabarito_A4.html` mudam sempre juntos.
 - Mudanças nas regras ou nos textos das Ações sem decisão explícita do grupo. Ao mudar o texto de uma Ação, atualize juntos o HTML e a seção 6 do README.
 - Alegações de que a duração e o balanceamento foram comprovados por playtests: os números do README vêm de simulação.
 
@@ -99,6 +103,7 @@ Ao propor novas regras, indique **“proposta”** e atualize documentação ape
 - [ ] README e AGENTS refletem alterações relevantes de contrato/escopo.
 - [ ] Textos das Ações iguais no HTML e na seção 6 do README.
 - [ ] `gabarito.md` só usa números e nomes de cartas que existem no HTML.
+- [ ] `gabarito.md` e `Chart_Battle_gabarito_A4.html` têm os mesmos números (verificação abaixo), e a folha cabe em 1 página A4.
 
 ### Exemplo de verificação rápida (Python + BeautifulSoup, se disponível)
 
@@ -125,6 +130,33 @@ assert all(card.select_one(".illustration") is None for card in soup.select(".ca
 ```
 
 **Observação:** o exemplo depende de `beautifulsoup4` apenas para verificação local; **não** é dependência do HTML em produção e não implica que um sistema de testes esteja implementado no repositório.
+
+### Verificação do gabarito (`gabarito.md` × folha HTML)
+
+```python
+import re
+from bs4 import BeautifulSoup
+
+md = open("gabarito.md", encoding="utf-8").read()
+key_md = {}
+for sec in re.split(r"^### (?=\d{2} · )", md, flags=re.M)[1:]:
+    rows = re.findall(r"^\| (\d{2}) [^|]+\| (.+) \|$", sec, flags=re.M)
+    acc = {int(v): [(int(r), bool(s)) for s, r in re.findall(r"(★ )?(\d{2}) ", vs + " ")] for v, vs in rows}
+    traps = [int(t) for t in re.findall(r"(\d{2}) ", re.search(r"\*\*Armadilha:\*\* (.+)", sec).group(1))]
+    key_md[int(sec[:2])] = (acc, traps)
+
+soup = BeautifulSoup(open("Chart_Battle_gabarito_A4.html", encoding="utf-8").read(), "html.parser")
+key_html = {}
+for tr in soup.select("tr[data-desafio]"):
+    acc = {}
+    for grp in tr.select(".grp"):
+        v = int(grp.select_one(".chip.v").get_text())
+        acc[v] = [(int(c.get_text().lstrip("★")), "star" in c["class"]) for c in grp.select(".chip.r")]
+    key_html[int(tr["data-desafio"])] = (acc, [int(c.get_text()) for c in tr.select(".chip.x")])
+
+assert sorted(key_md) == list(range(1, 19))
+assert key_md == key_html, "gabarito.md e Chart_Battle_gabarito_A4.html divergem"
+```
 
 ## Prioridades para contribuições futuras
 

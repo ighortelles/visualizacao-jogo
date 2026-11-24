@@ -30,7 +30,7 @@ O objetivo educativo não é decorar um único gráfico correto, mas justificar 
 
 Além das cartas, a partida usa:
 
-- **1 folha de gabarito**, com o conteúdo de [`gabarito.md`](./gabarito.md);
+- **1 folha de gabarito**, impressa de [`Chart_Battle_gabarito_A4.html`](./Chart_Battle_gabarito_A4.html) e dobrada ao meio (o mesmo conteúdo está em [`gabarito.md`](./gabarito.md));
 - **1 dado de 6 lados**, usado por cinco cartas de Ação;
 - **papel e caneta** para o placar.
 
@@ -207,30 +207,39 @@ Seis desafios tratam de codificação/percepção visual (01–06), seis de geoe
 
 **Tamanho proporcional** (38) vale para símbolos, como círculos e ícones; **Área proporcional** (39), para fatias, faixas e regiões. **Orientação** (46) é a inclinação da marca; **Direção do movimento** (50), o sentido de um fluxo. Além disso, mapas e séries temporais podem exigir **mais de um canal visual** na prática, mesmo que a mecânica peça uma só carta de Variável Visual.
 
-## 8. Arquivo HTML e impressão
+## 8. Arquivos HTML e impressão
 
-O artefato imprimível atual é [`Chart_Battle_102_cartas_A4.html`](./Chart_Battle_102_cartas_A4.html). Trata-se de um **documento HTML estático e autocontido**, com CSS e ilustrações vetoriais inline; **não é um jogo digital interativo** e não implementa regras, pontuação ou validação.
+Há dois arquivos para imprimir, ambos **HTML estáticos e autocontidos**, com CSS e ilustrações vetoriais inline, que funcionam sem internet:
+
+- [`Chart_Battle_102_cartas_A4.html`](./Chart_Battle_102_cartas_A4.html): as 102 cartas, em 12 folhas;
+- [`Chart_Battle_gabarito_A4.html`](./Chart_Battle_gabarito_A4.html): o gabarito, em 1 folha.
+
+Nenhum dos dois **é um jogo digital interativo** nem implementa regras, pontuação ou validação.
 
 ### Características técnicas já presentes
 
 - **102 cartas** distribuídas em **12 páginas A4** com até **9 cartas por página**, na grade de 3 colunas × 3 linhas (11 páginas completas e uma página com 3 cartas).
-- Página A4 retrato (**210 × 297 mm**), com **margem interna de 10 mm** em CSS.
+- Página A4 retrato (**210 × 297 mm**), com **margem interna de 10 mm** em CSS. A grade das cartas fica centralizada: **10,5 mm** nas laterais e **13,5 mm** em cima e embaixo.
 - Cada carta mede aproximadamente **61 × 88 mm**; espaçamento entre cartas de **3 mm**.
 - Cores do layout por categoria: **Dados = azul-escuro/azul-claro**, **Visualização = violeta/lilás**, **Variáveis Visuais = verde/verde-claro**, **Ação = rosa/magenta-rosado**.
 - As cores das **figuras internas são livres** e **não devem ser forçadas à paleta do cabeçalho**.
 - **Dados sem figuras**; outras categorias com ilustrações SVG.
 - Barra de impressão no navegador e estilos específicos para `@media print`.
 
+### Folha do gabarito
+
+Uma folha A4 com uma linha tracejada no meio. À esquerda ficam só números: o desafio, as visualizações aceitas com as suas variáveis (★ marca a dupla preferida) e a armadilha. À direita ficam as justificativas. Depois de imprimir, dobre a folha para trás na linha tracejada: quem confere vê só os números e abre a dobra para ler os porquês.
+
 ### Como imprimir ou exportar PDF
 
-1. Baixe/abra `Chart_Battle_102_cartas_A4.html` em um navegador moderno.
+1. Baixe/abra o arquivo em um navegador moderno.
 2. Clique em **Imprimir / Salvar em PDF** (ou use `Ctrl+P`).
-3. Selecione **A4**, **retrato**, **100%** de escala e **sem margens adicionais** no navegador (o documento já reserva 1 cm em cada lado).
+3. Selecione **A4**, **retrato**, **100%** de escala e **sem margens adicionais** no navegador (o documento já reserva a margem).
 4. Ative **gráficos/cores de fundo**, quando o navegador oferecer essa opção.
 5. Desative cabeçalhos e rodapés gerados pelo navegador; confira a pré-visualização antes de cortar.
-6. Recorte as cartas pelas bordas. Para cartas opacas e duráveis, use papel mais firme, plástico protetor ou sleeves.
+6. Recorte as cartas pelas bordas. Para cartas opacas e duráveis, use papel mais firme, plástico protetor ou sleeves. A folha do gabarito não é recortada, só dobrada.
 
-**Nota:** o CSS usa `@page { size: A4 portrait; margin: 0 }` para que a folha incorpore a própria margem de 10 mm. A margem física e a escala devem ser verificadas em impressão-teste. Não imprimir com “ajustar à página” se isso redimensionar as cartas.
+**Nota:** o CSS usa `@page { size: A4 portrait; margin: 0 }` para que a folha incorpore a própria margem de 10 mm. A margem física e a escala devem ser verificadas em impressão-teste. Não imprimir com “ajustar à página” se isso redimensionar as cartas. No PDF gerado pelo Firefox em 24/11/2026, as medidas conferem: 12 páginas de cartas com as margens acima e o gabarito em 1 página.
 
 ## 9. Estrutura mínima sugerida do repositório
 
@@ -240,6 +249,7 @@ chart-battle/
 ├── AGENTS.md
 ├── gabarito.md
 ├── Chart_Battle_102_cartas_A4.html
+├── Chart_Battle_gabarito_A4.html
 └── 2026_2_Jogos_enunciado.pdf
 ```
 
@@ -252,7 +262,7 @@ Ainda não há sistema de build, framework JavaScript, testes automatizados, arq
 - [ ] Realizar playtests com **2, 3, 4 e 6 pessoas**, registrando duração, taxa de mãos sem combinação e frequência de ações. A simulação já foi feita (seção 12); faltam partidas reais.
 - [x] Ajustar o balanceamento dos montes e a meta de 15 pontos, por simulação (seção 12).
 - [x] Revisar a precisão conceitual dos exemplos de visualização e suas legendas: histograma, boxplot, mapa de calor, saturação, direção do movimento, cor única nos canais visuais e legendas 38, 39 e 46.
-- [ ] Testar impressão real em A4, conferindo margem de 1 cm, corte e legibilidade.
+- [ ] Testar impressão real em A4, conferindo margem, corte e legibilidade. O PDF pelo Firefox foi conferido em 24/11/2026; falta imprimir em papel.
 - [ ] Opcional: criar o **verso das cartas**, manual de regras diagramado e fichas de pontuação.
 - [ ] Opcional: automatizar a geração do baralho, o gabarito e os testes estruturais.
 

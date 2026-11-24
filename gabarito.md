@@ -4,6 +4,8 @@ Gabarito dos 18 desafios: quais duplas de **Visualização + Variável Visual** 
 
 > **Estado:** versão 1, aprovada pelo grupo em 24/11/2026. Ainda não passou por partidas reais; ajustes que vierem dos playtests devem ser registrados aqui.
 
+**Para imprimir:** [`Chart_Battle_gabarito_A4.html`](./Chart_Battle_gabarito_A4.html) tem os mesmos números e justificativas numa folha A4, para dobrar ao meio. Ao mudar este arquivo, mude a folha também.
+
 ## Como pontuar
 
 O gabarito é **estrito**: só pontua o que está listado, sem defesa nem votação.
